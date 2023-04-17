@@ -24,6 +24,12 @@ public class LoginController : Controller
         return await _userInfoService.CreateAccount(username, password);
     }
     
+    [HttpPost]
+    public string Test()
+    {
+        return "Hello World";
+    }
+    
     
     // [HttpPost]
     // public HttpStatusCode ChangePassword(string username, string password)
