@@ -7,7 +7,12 @@ namespace loginApi.Repos;
 
 public class AccountRepo
 {
-    private readonly string _connStr = "server=localhost;user=root;database=userinfo;port=3306;password=Alexstartw8523;";
+    private static string _dbHost = "35.201.224.32";
+    private static string _dbUser = "root";
+    private string _dbPassword = "";
+    private static string _dbName = "userinfo";
+    
+    private readonly string _connStr = "server=" + _dbHost + ";user=" + _dbUser + ";database=" + _dbName + ";port=3306;password=;";
     
     public HttpStatusCode CreateAccount(string username, string password)
     {
