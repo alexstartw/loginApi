@@ -5,28 +5,27 @@ using MySql.Data.MySqlClient;
 
 namespace loginApi.Repos;
 
-public class AccountRepo
+public class AccountRepo : IAccountRepo
 {
-    private static string _dbHost = "35.201.224.32";
-    private static string _dbUser = "root";
-    private string _dbPassword = "";
-    private static string _dbName = "userinfo";
-    
-    private readonly string _connStr = "server=" + _dbHost + ";user=" + _dbUser + ";database=" + _dbName + ";port=3306;password=;";
-    
+    private const string DbHost = "35.201.224.32";
+    private const string DbUser = "root";
+    private const string DbName = "userinfo";
+    private const string ConnStr = "server=" + DbHost + ";user=" + DbUser + ";database=" + DbName + ";port=3306;password=;";
+
     public HttpStatusCode CreateAccount(string username, string password)
     {
-        IDbConnection conn = new MySqlConnection(_connStr);
+        IDbConnection conn = new MySqlConnection(ConnStr);
         try
         {
             Console.WriteLine("Connecting to MySQL...");
             conn.Open();
             Console.WriteLine("Connected!");
             
-            string sql = $"INSERT INTO userinfo (username, password, created_time, update_time) VALUES (@username, @password, @created_time, @update_time)";
+            string sql = $"INSERT INTO userinfo (username, password, created_time, update_time, enable) VALUES (@username, @password, @created_time, @update_time, @enable)";
             var createdTime = DateTime.Now;
             var updateTime = DateTime.Now;
-            var rowAffected = conn.Execute(sql, new { username , password , created_time = createdTime, update_time = updateTime });
+            var enable = AccountStatus.Enable;
+            var rowAffected = conn.Execute(sql, new { username , password , created_time = createdTime, update_time = updateTime, enable });
             Console.WriteLine(rowAffected+" account had been created.");
             
         }
@@ -41,7 +40,7 @@ public class AccountRepo
     
     public async Task<HttpStatusCode> CheckUserExist(string username)
     {
-        IDbConnection conn = new MySqlConnection(_connStr);
+        IDbConnection conn = new MySqlConnection(ConnStr);
         try
         {
             Console.WriteLine("Connecting to MySQL...");
@@ -67,40 +66,10 @@ public class AccountRepo
         Console.WriteLine("Done.");
         return HttpStatusCode.OK;
     }
-    
-    public async Task<bool> CheckUsername(string username, string password)
-    {
-        IDbConnection conn = new MySqlConnection(_connStr);
-        try
-        {
-            Console.WriteLine("Connecting to MySQL...");
-            conn.Open();
-            Console.WriteLine("Connected!");
-            
-            string sql = $"SELECT username from userinfo WHERE username = @username";
-            var isUserExist = await conn.ExecuteScalarAsync<int>(sql, new { username });
-            
-            Console.WriteLine(isUserExist);
-
-            if (isUserExist == 0)
-            {
-                return false;
-            }
-            
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine(ex.ToString());
-            return false;
-        }
-        conn.Close();
-        Console.WriteLine("Done.");
-        return true;
-    }
 
     public async Task<bool> CheckPassword(string username, string password)
     {
-        IDbConnection conn = new MySqlConnection(_connStr);
+        IDbConnection conn = new MySqlConnection(ConnStr);
         try
         {
             Console.WriteLine("Connecting to MySQL...");
@@ -130,7 +99,7 @@ public class AccountRepo
     
     public HttpStatusCode ChangePassword(string username, string password)
     {
-        IDbConnection conn = new MySqlConnection(_connStr);
+        IDbConnection conn = new MySqlConnection(ConnStr);
         try
         {
             Console.WriteLine("Connecting to MySQL...");

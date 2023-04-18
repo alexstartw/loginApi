@@ -1,8 +1,5 @@
-﻿using System.Data;
-using System.Net;
+﻿using System.Net;
 using Microsoft.AspNetCore.Mvc;
-using MySql.Data.MySqlClient;
-using Dapper;
 using loginApi.Services;
 
 namespace loginApi.Controllers;
