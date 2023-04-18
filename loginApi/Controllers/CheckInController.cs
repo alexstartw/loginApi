@@ -15,8 +15,26 @@ public class CheckInController : Controller
     }
 
     [HttpPost]
-    public bool TodayCheckIn(string username)
+    public Task<bool> TodayCheckIn(string username)
     {
         return _checkInService.TodayCheckIn(username);
+    }
+    
+    [HttpPost]
+    public bool GetTodayCheckInStatus(string username)
+    {
+        return _checkInService.GetTodayCheckInStatus(username);
+    }
+    
+    [HttpPost]
+    public int GetMonthCheckInCount(string username, DateTime dateTime)
+    {
+        return _checkInService.GetMonthCheckInCount(username, dateTime);
+    }
+    
+    [HttpPost]
+    public int GetAbsentCount(string username, DateTime dateTime)
+    {
+        return _checkInService.GetAbsentCount(username, dateTime);
     }
 }

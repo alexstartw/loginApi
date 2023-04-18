@@ -1,6 +1,7 @@
 ﻿using System.Data;
 using System.Net;
 using Dapper;
+using loginApi.Enums;
 using MySql.Data.MySqlClient;
 
 namespace loginApi.Repos;

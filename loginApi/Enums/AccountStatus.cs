@@ -1,4 +1,4 @@
-﻿namespace loginApi;
+﻿namespace loginApi.Enums;
 
 public enum AccountStatus
 {

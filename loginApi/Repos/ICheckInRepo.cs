@@ -3,8 +3,8 @@
 public interface ICheckInRepo
 {
     public bool TodayCheckIn(string username);
-    public Task<bool> GetTodayCheckInStatus(string username);
-    public Task<int> GetCheckInCount(string username);
-    public Task<int> GetAbsentCount(string username);
+    public bool GetTodayCheckInStatus(string username);
+    public int GetMonthCheckInCount(string username, DateTime dateTime);
+    public int GetAbsentCount(string username, DateTime dateTime);
     
 }
