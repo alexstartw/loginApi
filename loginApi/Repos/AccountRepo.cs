@@ -23,10 +23,8 @@ public class AccountRepo : IAccountRepo
             Console.WriteLine("Connected!");
             
             string sql = $"INSERT INTO userinfo (username, password, created_time, update_time, enable) VALUES (@username, @password, @created_time, @update_time, @enable)";
-            var createdTime = DateTime.Now;
-            var updateTime = DateTime.Now;
-            var enable = AccountStatus.Enable;
-            var rowAffected = conn.Execute(sql, new { username , password , created_time = createdTime, update_time = updateTime, enable });
+            var rowAffected = conn.Execute(sql, new { username , password , created_time = DateTime.Now, update_time = DateTime.Now,
+                enable = AccountStatus.Enable });
             if (rowAffected==1)
             {
                 Console.WriteLine(rowAffected+" account had been created.");

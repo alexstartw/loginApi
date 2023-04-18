@@ -1,6 +1,4 @@
 ﻿using System.Data;
-using System.Globalization;
-using System.Net;
 using Dapper;
 using loginApi.Enums;
 using MySql.Data.MySqlClient;
@@ -15,7 +13,7 @@ public class CheckInRepo : ICheckInRepo
     private const string DbName = "userinfo";
     private const string ConnStr = "server=" + DbHost + ";user=" + DbUser + ";database=" + DbName + ";port=3306;password=;";
     
-    public bool TodayCheckIn(string username)
+    public bool TodayCheckIn(string username, DateTime dateTime)
     {
         IDbConnection conn = new MySqlConnection(ConnStr);
         try
@@ -26,17 +24,7 @@ public class CheckInRepo : ICheckInRepo
             
             string sql = $"INSERT INTO checkin (username, checkin_time, enable) VALUES (@username, @checkin_time,@enable)";
 
-            var tzi = TimeZoneInfo.FindSystemTimeZoneById("Taipei Standard Time");
-            var nowDatetime = TimeZoneInfo.ConvertTime(DateTimeOffset.Now, tzi);
-
-            var localTime = nowDatetime.LocalDateTime;
-            var localDay = localTime.Date;
-            if (localTime.TimeOfDay < new TimeSpan(5, 0, 0))
-            {
-                localDay = localDay.AddDays(-1);
-            }
-            
-            var rowAffected = conn.Execute(sql, new { username , checkin_time = localDay, CheckInRecordStatus.Enable});
+            var rowAffected = conn.Execute(sql, new { username , checkin_time = dateTime, CheckInRecordStatus.Enable});
             Console.WriteLine(username + " add " + rowAffected + " checkin record.");
         }
         catch (Exception ex)
@@ -75,10 +63,8 @@ public class CheckInRepo : ICheckInRepo
         return true;
     }
 
-    public int GetMonthCheckInCount(string username, DateTime dateTime)
+    public int GetMonthCheckInCount(string username, DateTime dateTime, string[] workDays)
     {
-        var workDays = GetMonthWorkdays(dateTime).ToArray();
-
         int checkInCount;
 
         IDbConnection conn = new MySqlConnection(ConnStr);
@@ -104,9 +90,8 @@ public class CheckInRepo : ICheckInRepo
         
     }
 
-    public int GetAbsentCount(string username, DateTime dateTime)
+    public int GetAbsentCount(string username, DateTime dateTime, string[] workDays)
     {
-        var workdays = GetMonthWorkdaysTilToday(dateTime).ToArray();
 
         int checkInCount;
 
@@ -119,7 +104,7 @@ public class CheckInRepo : ICheckInRepo
 
             string sql = $"Select count(*) from checkin where username = @username and CAST(checkin_time AS DATE) in @workdays and enable = 1";
             
-            checkInCount = conn.ExecuteScalar<int>(sql, new { username, workdays });
+            checkInCount = conn.ExecuteScalar<int>(sql, new { username, workDays });
             Console.WriteLine(username + " had " + checkInCount + " checkin record in " + dateTime.Month +".");
 
         }
@@ -129,56 +114,7 @@ public class CheckInRepo : ICheckInRepo
             return 0; 
         }
         conn.Close();
-        return workdays.Length - checkInCount;
+        return workDays.Length - checkInCount;
     }
-    private IEnumerable<string> GetMonthWorkdaysTilToday(DateTime today)
-    {
-        TimeZoneInfo taipeiZone = TimeZoneInfo.FindSystemTimeZoneById("Taipei Standard Time");
-        DateTimeOffset taipeiTime = TimeZoneInfo.ConvertTime(today, taipeiZone);
-
-        CultureInfo taiwanCulture = new CultureInfo("zh-TW");
-        DateTimeFormatInfo taiwanDateTimeFormat = taiwanCulture.DateTimeFormat;
-
-
-        var startDate = new DateTime(taipeiTime.Year, taipeiTime.Month, 1);
-        var endDate = new DateTime(taipeiTime.Year, taipeiTime.Month,taipeiTime.Day);
-        var workDays = new List<string>();
-
-        for (var date = startDate; date <= endDate; date = date.AddDays(1))
-        {
-            if (taiwanDateTimeFormat.Calendar.GetDayOfWeek(date) != DayOfWeek.Saturday
-                && taiwanDateTimeFormat.Calendar.GetDayOfWeek(date) != DayOfWeek.Sunday)
-            {
-                workDays.Add(date.ToString("yyyy-MM-dd"));
-            }
-        }
-
-        return workDays;
-    }
-
-    private IEnumerable<string> GetMonthWorkdays(DateTime dateTime1)
-    {
-        TimeZoneInfo taipeiZone = TimeZoneInfo.FindSystemTimeZoneById("Taipei Standard Time");
-        DateTimeOffset taipeiTime = TimeZoneInfo.ConvertTime(dateTime1, taipeiZone);
-
-        CultureInfo taiwanCulture = new CultureInfo("zh-TW");
-        DateTimeFormatInfo taiwanDateTimeFormat = taiwanCulture.DateTimeFormat;
-
-
-        var startDate = new DateTime(taipeiTime.Year, taipeiTime.Month, 1);
-        var endDate = new DateTime(taipeiTime.Year, taipeiTime.Month,
-            DateTime.DaysInMonth(taipeiTime.Year, taipeiTime.Month));
-        var workDays = new List<string>();
-
-        for (var date = startDate; date <= endDate; date = date.AddDays(1))
-        {
-            if (taiwanDateTimeFormat.Calendar.GetDayOfWeek(date) != DayOfWeek.Saturday
-                && taiwanDateTimeFormat.Calendar.GetDayOfWeek(date) != DayOfWeek.Sunday)
-            {
-                workDays.Add(date.ToString("yyyy-MM-dd"));
-            }
-        }
-
-        return workDays;
-    }
+    
 }
