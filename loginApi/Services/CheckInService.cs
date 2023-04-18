@@ -11,8 +11,8 @@ public class CheckInService
         _checkInRepo = checkInRepo;
     }
     
-    public async Task<bool> TodayCheckIn(string username)
+    public bool TodayCheckIn(string username)
     {
-        return await _checkInRepo.TodayCheckIn(username);
+        return _checkInRepo.TodayCheckIn(username);
     }
 }

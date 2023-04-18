@@ -12,7 +12,7 @@ public class CheckInRepo : ICheckInRepo
     private const string DbName = "userinfo";
     private const string ConnStr = "server=" + DbHost + ";user=" + DbUser + ";database=" + DbName + ";port=3306;password=;";
     
-    public async Task<bool> TodayCheckIn(string username)
+    public bool TodayCheckIn(string username)
     {
         IDbConnection conn = new MySqlConnection(ConnStr);
         try

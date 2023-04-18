@@ -10,8 +10,8 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddTransient<AccountRepo>();
-builder.Services.AddTransient<UserInfoService>();
 builder.Services.AddTransient<CheckInRepo>();
+builder.Services.AddTransient<UserInfoService>();
 builder.Services.AddTransient<CheckInService>();
 
 

@@ -15,8 +15,8 @@ public class CheckInController : Controller
     }
 
     [HttpPost]
-    public async Task<bool> TodayCheckIn(string username)
+    public bool TodayCheckIn(string username)
     {
-        return await _checkInService.TodayCheckIn(username);
+        return _checkInService.TodayCheckIn(username);
     }
 }
