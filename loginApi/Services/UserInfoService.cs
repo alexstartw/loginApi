@@ -12,16 +12,15 @@ public class UserInfoService
         _accountRepo = accountRepo;
     }
     
-    public async Task<HttpStatusCode> CreateAccount(string username, string password)
+    public async Task<HttpStatusCode> CreateNewUser(string username, string password)
     {
         var checkUserExistStatus = await _accountRepo.CheckUserExist(username);
-        if (checkUserExistStatus==HttpStatusCode.OK)
+        if (!checkUserExistStatus)
         {
             return _accountRepo.CreateAccount(username, password);
         }
 
-        return checkUserExistStatus == HttpStatusCode.Conflict ? checkUserExistStatus : HttpStatusCode.InternalServerError;
-
+        return checkUserExistStatus ? HttpStatusCode.Conflict : HttpStatusCode.InternalServerError;
 
     }
     
@@ -29,5 +28,16 @@ public class UserInfoService
     {
         return _accountRepo.CheckPassword(username, password);
     }
-    
+
+    public async Task<bool> CheckUsernameExist(string username)
+    {
+        var checkUserExistStatus = await _accountRepo.CheckUserExist(username);
+        return checkUserExistStatus;
+    }
+
+    public async Task<HttpStatusCode> ChangePassword(string username, string password)
+    {
+        var checkUserExistStatus = await _accountRepo.CheckUserExist(username);
+        return checkUserExistStatus ? _accountRepo.ChangePassword(username, password) : HttpStatusCode.InternalServerError;
+    }
 }

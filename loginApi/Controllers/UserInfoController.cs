@@ -16,40 +16,26 @@ public class LoginController : Controller
     }
 
     [HttpPost]
-    public async Task<HttpStatusCode> NewUserInfo(string username, string password)
+    public async Task<HttpStatusCode> CreateNewUser(string username, string password)
     {
-        return await _userInfoService.CreateAccount(username, password);
+        return await _userInfoService.CreateNewUser(username, password);
     }
     
     [HttpPost]
-    public string Test()
+    public async Task<bool> CheckUsernameExist(string username)
     {
-        return "Hello World";
+        return await _userInfoService.CheckUsernameExist(username);
     }
     
+    [HttpPost]
+    public async Task<bool> CheckPassword(string username, string password)
+    {
+        return await _userInfoService.CheckPassword(username, password);
+    }
     
-    // [HttpPost]
-    // public HttpStatusCode ChangePassword(string username, string password)
-    // {
-    //     IDbConnection conn = new MySqlConnection(_connStr);
-    //     try
-    //     {
-    //         Console.WriteLine("Connecting to MySQL...");
-    //         conn.Open();
-    //         Console.WriteLine("Connected!");
-    //         
-    //         string sql = $"UPDATE userinfo SET password = @password WHERE username = @username";
-    //         var rowAffected = conn.Execute(sql, new { username , password });
-    //         Console.WriteLine(rowAffected);
-    //         
-    //     }
-    //     catch (Exception ex)
-    //     {
-    //         Console.WriteLine(ex.ToString());
-    //         return HttpStatusCode.InternalServerError; 
-    //     }
-    //     conn.Close();
-    //     Console.WriteLine("Done.");
-    //     return HttpStatusCode.OK;
-    // }
+    [HttpPost]
+    public async Task<HttpStatusCode> ChangePassword(string username, string password)
+    {
+        return await _userInfoService.ChangePassword(username, password);
+    }
 }

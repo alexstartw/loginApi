@@ -26,7 +26,14 @@ public class AccountRepo : IAccountRepo
             var updateTime = DateTime.Now;
             var enable = AccountStatus.Enable;
             var rowAffected = conn.Execute(sql, new { username , password , created_time = createdTime, update_time = updateTime, enable });
-            Console.WriteLine(rowAffected+" account had been created.");
+            if (rowAffected==1)
+            {
+                Console.WriteLine(rowAffected+" account had been created.");
+            }
+            else
+            {
+                throw new Exception(username + " : Create account failed.");
+            }
             
         }
         catch (Exception ex)
@@ -38,7 +45,7 @@ public class AccountRepo : IAccountRepo
         return HttpStatusCode.OK;
     }
     
-    public async Task<HttpStatusCode> CheckUserExist(string username)
+    public async Task<bool> CheckUserExist(string username)
     {
         IDbConnection conn = new MySqlConnection(ConnStr);
         try
@@ -53,18 +60,18 @@ public class AccountRepo : IAccountRepo
             Console.WriteLine(rowAffected);
             if (rowAffected>0)
             {
-                return HttpStatusCode.Conflict;
+                return true;
             }
             
         }
         catch (Exception ex)
         {
             Console.WriteLine(ex.ToString());
-            return HttpStatusCode.InternalServerError; 
+            return false; 
         }
         conn.Close();
         Console.WriteLine("Done.");
-        return HttpStatusCode.OK;
+        return false;
     }
 
     public async Task<bool> CheckPassword(string username, string password)
