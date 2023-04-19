@@ -38,4 +38,10 @@ public class LoginController : Controller
     {
         return await _userInfoService.ChangePassword(username, password);
     }
+    
+    [HttpGet]
+    public string Test()
+    {
+        return "test";
+    }
 }
