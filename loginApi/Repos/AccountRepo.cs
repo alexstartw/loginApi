@@ -84,8 +84,11 @@ public class AccountRepo : IAccountRepo
             
             string sql = $"SELECT password from userinfo WHERE username = @username";
             var dbPw = await conn.ExecuteScalarAsync<string>(sql, new { username });
+
+            Console.WriteLine("username: " + username);
+            Console.WriteLine("password: " + password);
             
-            Console.WriteLine(dbPw);
+            Console.WriteLine("dbPW" + dbPw);
 
             if (!password.Equals(dbPw))
             {
