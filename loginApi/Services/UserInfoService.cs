@@ -38,6 +38,12 @@ public class UserInfoService
     public async Task<HttpStatusCode> ChangePassword(string username, string password)
     {
         var checkUserExistStatus = await _accountRepo.CheckUserExist(username);
-        return checkUserExistStatus ? _accountRepo.ChangePassword(username, password) : HttpStatusCode.InternalServerError;
+        var checkPasswordStatus = await _accountRepo.CheckPassword(username, password);
+        if (!checkUserExistStatus || !checkPasswordStatus )
+        {
+            return HttpStatusCode.BadRequest;
+        }
+        
+        return _accountRepo.ChangePassword(username, password) ;
     }
 }
