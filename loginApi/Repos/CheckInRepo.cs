@@ -74,9 +74,9 @@ public class CheckInRepo : ICheckInRepo
             conn.Open();
             Console.WriteLine("Connected!");
 
-            string sql = $"Select count(*) from checkin where username = @username and CAST(checkin_time AS DATE) in @workdays and enable = 1";
+            string sql = $"Select count(*) from checkin where username = @username and CAST(checkin_time AS DATE) in @workDays and enable = 1";
             
-            checkInCount = conn.ExecuteScalar<int>(sql, new { username, workdays = workDays });
+            checkInCount = conn.ExecuteScalar<int>(sql, new { username, workDays });
             Console.WriteLine(username + " had " + checkInCount + " checkin record in " + dateTime.Month +".");
 
         }
@@ -90,7 +90,7 @@ public class CheckInRepo : ICheckInRepo
         
     }
 
-    public int GetAbsentCount(string username, DateTime dateTime, string[] workDays)
+    public int GetAbsentCount(string username, string[] workDays)
     {
 
         int checkInCount;
@@ -105,7 +105,7 @@ public class CheckInRepo : ICheckInRepo
             string sql = $"Select count(*) from checkin where username = @username and CAST(checkin_time AS DATE) in @workdays and enable = 1";
             
             checkInCount = conn.ExecuteScalar<int>(sql, new { username, workDays });
-            Console.WriteLine(username + " had " + checkInCount + " checkin record in " + dateTime.Month +".");
+            Console.WriteLine(username + " had " + checkInCount + " checkin record" +".");
 
         }
         catch (Exception ex)

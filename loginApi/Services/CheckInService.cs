@@ -58,10 +58,10 @@ public class CheckInService
         return _checkInRepo.GetMonthCheckInCount(username, dateTime, workDays);
     }
     
-    public int GetAbsentCount(string username, DateTime dateTime)
+    public int GetAbsentCount(string username)
     {
-        var workDays = GetMonthWorkdaysTilToday(dateTime).ToArray();
-        return _checkInRepo.GetAbsentCount(username, dateTime, workDays);
+        var workDays = GetMonthWorkdaysTilToday().ToArray();
+        return _checkInRepo.GetAbsentCount(username, workDays);
     }
     
     private IEnumerable<string> GetMonthWorkdays(DateTime dateTime1)
@@ -89,17 +89,24 @@ public class CheckInService
 
         return workDays;
     }
-    private IEnumerable<string> GetMonthWorkdaysTilToday(DateTime today)
+    private IEnumerable<string> GetMonthWorkdaysTilToday()
     {
-        TimeZoneInfo taipeiZone = TimeZoneInfo.FindSystemTimeZoneById("Taipei Standard Time");
-        DateTimeOffset taipeiTime = TimeZoneInfo.ConvertTime(today, taipeiZone);
+        var tzi = TimeZoneInfo.FindSystemTimeZoneById("Taipei Standard Time");
+        var nowDatetime = TimeZoneInfo.ConvertTime(DateTimeOffset.Now, tzi);
+
+        var localTime = nowDatetime.LocalDateTime;
+        var localDay = localTime;
+        if (localTime.TimeOfDay < new TimeSpan(5, 0, 0))
+        {
+            localDay = localDay.AddDays(-1);
+        }
 
         CultureInfo taiwanCulture = new CultureInfo("zh-TW");
         DateTimeFormatInfo taiwanDateTimeFormat = taiwanCulture.DateTimeFormat;
 
 
-        var startDate = new DateTime(taipeiTime.Year, taipeiTime.Month, 1);
-        var endDate = new DateTime(taipeiTime.Year, taipeiTime.Month,taipeiTime.Day);
+        var startDate = new DateTime(localDay.Year, localDay.Month, 1);
+        var endDate = new DateTime(localDay.Year, localDay.Month,localDay.Day);
         var workDays = new List<string>();
 
         for (var date = startDate; date <= endDate; date = date.AddDays(1))

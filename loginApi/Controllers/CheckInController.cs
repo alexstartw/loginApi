@@ -33,8 +33,8 @@ public class CheckInController : Controller
     }
     
     [HttpPost]
-    public int GetAbsentCount(string username, DateTime dateTime)
+    public int GetAbsentCount(string username)
     {
-        return _checkInService.GetAbsentCount(username, dateTime);
+        return _checkInService.GetAbsentCount(username);
     }
 }
