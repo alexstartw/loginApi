@@ -45,9 +45,9 @@ public class CheckInRepo : ICheckInRepo
             conn.Open();
             Console.WriteLine("Connected!");
             
-            string sql = $"Select count(*) from checkin where username = @username and CAST(checkin_time AS DATE) = CAST(NOW() AS DATE) and enable = 1";
+            string sql = $"Select count(*) from checkin where username = @username and CAST(checkin_time AS DATE) = CAST(@now_time AS DATE) and enable = 1";
             
-            var rowAffected = conn.ExecuteScalar<int>(sql, new { username });
+            var rowAffected = conn.ExecuteScalar<int>(sql, new { username, now_time = localDay });
             Console.WriteLine(username + " had " + rowAffected + " checkin record today.");
             if (rowAffected == 0)
             {
