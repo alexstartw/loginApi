@@ -16,22 +16,22 @@ public class CheckInService
     
     public async Task<bool> TodayCheckIn(string username)
     {
+        var tzi = TimeZoneInfo.FindSystemTimeZoneById("Taipei Standard Time");
+        var nowDatetime = TimeZoneInfo.ConvertTime(DateTimeOffset.Now, tzi);
+
+        var localTime = nowDatetime.LocalDateTime;
+        var localDay = localTime;
+        if (localTime.TimeOfDay < new TimeSpan(5, 0, 0))
+        {
+            localDay = localDay.AddDays(-1);
+        }
         var userExist = await _accountRepo.CheckUserExist(username);
-        var hadCheckIn = _checkInRepo.GetTodayCheckInStatus(username);
+        var hadCheckIn = _checkInRepo.GetTodayCheckInStatus(username,localDay);
         Console.WriteLine("CheckInService: userExist: " + userExist);
         Console.WriteLine("CheckInService: hadCheckIn: " + hadCheckIn);
         if (userExist && !hadCheckIn)
         {
             Console.WriteLine("CheckInService: TodayCheckIn");
-            var tzi = TimeZoneInfo.FindSystemTimeZoneById("Taipei Standard Time");
-            var nowDatetime = TimeZoneInfo.ConvertTime(DateTimeOffset.Now, tzi);
-
-            var localTime = nowDatetime.LocalDateTime;
-            var localDay = localTime;
-            if (localTime.TimeOfDay < new TimeSpan(5, 0, 0))
-            {
-                localDay = localDay.AddDays(-1);
-            }
             return _checkInRepo.TodayCheckIn(username, localDay);
         }
 
@@ -40,7 +40,16 @@ public class CheckInService
     
     public bool GetTodayCheckInStatus(string username)
     {
-        return _checkInRepo.GetTodayCheckInStatus(username);
+        var tzi = TimeZoneInfo.FindSystemTimeZoneById("Taipei Standard Time");
+        var nowDatetime = TimeZoneInfo.ConvertTime(DateTimeOffset.Now, tzi);
+
+        var localTime = nowDatetime.LocalDateTime;
+        var localDay = localTime;
+        if (localTime.TimeOfDay < new TimeSpan(5, 0, 0))
+        {
+            localDay = localDay.AddDays(-1);
+        }
+        return _checkInRepo.GetTodayCheckInStatus(username, localDay);
     }
     
     public int GetMonthCheckInCount(string username, DateTime dateTime)

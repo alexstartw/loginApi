@@ -25,7 +25,7 @@ public class CheckInRepo : ICheckInRepo
             string sql = $"INSERT INTO checkin (username, checkin_time, enable) VALUES (@username, @checkin_time,@enable)";
 
             var rowAffected = conn.Execute(sql, new { username , checkin_time = dateTime, CheckInRecordStatus.Enable});
-            Console.WriteLine(username + " add " + rowAffected + " checkin record.");
+            Console.WriteLine(username + " add " + rowAffected + " checkin record. Time: " + dateTime.Date);
         }
         catch (Exception ex)
         {
@@ -36,7 +36,7 @@ public class CheckInRepo : ICheckInRepo
         return true;
     }
 
-    public bool GetTodayCheckInStatus(string username)
+    public bool GetTodayCheckInStatus(string username, DateTime localDay)
     {
         IDbConnection conn = new MySqlConnection(ConnStr);
         try
