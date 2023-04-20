@@ -106,7 +106,7 @@ public class AccountRepo : IAccountRepo
         return true;
     }
     
-    public HttpStatusCode ChangePassword(string username, string password)
+    public HttpStatusCode ChangePassword(string username, string newPassword)
     {
         IDbConnection conn = new MySqlConnection(ConnStr);
         try
@@ -116,9 +116,9 @@ public class AccountRepo : IAccountRepo
             Console.WriteLine("Connected!");
             
             string sql = $"UPDATE userinfo SET password = @password WHERE username = @username";
-            var rowAffected = conn.Execute(sql, new { username , password });
+            var rowAffected = conn.Execute(sql, new { username , password = newPassword });
             Console.WriteLine(rowAffected);
-            
+
         }
         catch (Exception ex)
         {

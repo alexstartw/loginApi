@@ -34,9 +34,9 @@ public class LoginController : Controller
     }
     
     [HttpPost]
-    public async Task<HttpStatusCode> ChangePassword(string username, string password)
+    public async Task<HttpStatusCode> ChangePassword(string username, string oldPassword, string newPassword)
     {
-        return await _userInfoService.ChangePassword(username, password);
+        return await _userInfoService.ChangePassword(username, oldPassword, newPassword);
     }
     
     [HttpGet]

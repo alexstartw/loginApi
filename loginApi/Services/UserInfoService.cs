@@ -35,15 +35,15 @@ public class UserInfoService
         return checkUserExistStatus;
     }
 
-    public async Task<HttpStatusCode> ChangePassword(string username, string password)
+    public async Task<HttpStatusCode> ChangePassword(string username, string oldPassword, string newPassword)
     {
         var checkUserExistStatus = await _accountRepo.CheckUserExist(username);
-        var checkPasswordStatus = await _accountRepo.CheckPassword(username, password);
+        var checkPasswordStatus = await _accountRepo.CheckPassword(username, oldPassword);
         if (!checkUserExistStatus || !checkPasswordStatus )
         {
             return HttpStatusCode.BadRequest;
         }
         
-        return _accountRepo.ChangePassword(username, password) ;
+        return _accountRepo.ChangePassword(username, newPassword) ;
     }
 }
