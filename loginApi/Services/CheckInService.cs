@@ -18,6 +18,8 @@ public class CheckInService
     {
         var userExist = await _accountRepo.CheckUserExist(username);
         var hadCheckIn = _checkInRepo.GetTodayCheckInStatus(username);
+        Console.WriteLine("CheckInService: userExist: " + userExist);
+        Console.WriteLine("CheckInService: hadCheckIn: " + hadCheckIn);
         if (userExist && !hadCheckIn)
         {
             Console.WriteLine("CheckInService: TodayCheckIn");
@@ -25,7 +27,7 @@ public class CheckInService
             var nowDatetime = TimeZoneInfo.ConvertTime(DateTimeOffset.Now, tzi);
 
             var localTime = nowDatetime.LocalDateTime;
-            var localDay = localTime.Date;
+            var localDay = localTime;
             if (localTime.TimeOfDay < new TimeSpan(5, 0, 0))
             {
                 localDay = localDay.AddDays(-1);
