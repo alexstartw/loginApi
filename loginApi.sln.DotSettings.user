@@ -1,10 +1,11 @@
 ﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=970f13a1_002Dddb7_002D424f_002D930a_002Debb0e802cf57/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="UsernameNotExistShouldCreateSuccessAndReturnOk" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=970f13a1_002Dddb7_002D424f_002D930a_002Debb0e802cf57/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="UsernameNotExistShouldCreateSuccessAndReturnOk" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
   &lt;TestAncestor&gt;&#xD;
-    &lt;TestId&gt;NUnit3x::435C0F1C-8712-4F25-8301-FA96F46C2536::net6.0::LoginApiTest.Tests.UsernameNotExistShouldCreateSuccessAndReturnOk&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::435C0F1C-8712-4F25-8301-FA96F46C2536::net6.0::LoginApiTest.Tests&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::435C0F1C-8712-4F25-8301-FA96F46C2536::net6.0::LoginApiTest.CheckInTest.WhenTodayCheckInUserExistAndNotCheckInShouldReturnTrue&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String>
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=c99a8e4f_002D18a2_002D4b8f_002Dbb4b_002D0013b59e025d/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="UsernameNotExistShouldCreateSuccessAndReturnOk #2" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=c99a8e4f_002D18a2_002D4b8f_002Dbb4b_002D0013b59e025d/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="UsernameNotExistShouldCreateSuccessAndReturnOk #2" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
   &lt;TestAncestor&gt;&#xD;
     &lt;TestId&gt;NUnit3x::435C0F1C-8712-4F25-8301-FA96F46C2536::net6.0::LoginApiTest.Tests.UsernameNotExistShouldCreateSuccessAndReturnOk&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;

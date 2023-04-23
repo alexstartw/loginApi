@@ -13,7 +13,7 @@ public class CheckInRepo : ICheckInRepo
     private const string DbName = "userinfo";
     private const string ConnStr = "server=" + DbHost + ";user=" + DbUser + ";database=" + DbName + ";port=3306;password=;";
     
-    public bool TodayCheckIn(string username, DateTime dateTime)
+    public virtual bool TodayCheckIn(string username, DateTime dateTime)
     {
         IDbConnection conn = new MySqlConnection(ConnStr);
         try
@@ -36,7 +36,7 @@ public class CheckInRepo : ICheckInRepo
         return true;
     }
 
-    public bool GetTodayCheckInStatus(string username, DateTime localDay)
+    public virtual bool GetTodayCheckInStatus(string username, DateTime localDay)
     {
         IDbConnection conn = new MySqlConnection(ConnStr);
         try
@@ -63,7 +63,7 @@ public class CheckInRepo : ICheckInRepo
         return true;
     }
 
-    public int GetMonthCheckInCount(string username, DateTime dateTime, string[] workDays)
+    public virtual int GetMonthCheckInCount(string username, DateTime dateTime, string[] workDays)
     {
         int checkInCount;
 
@@ -90,7 +90,7 @@ public class CheckInRepo : ICheckInRepo
         
     }
 
-    public int GetAbsentCount(string username, string[] workDays)
+    public virtual int GetAbsentCount(string username, string[] workDays)
     {
 
         int checkInCount;

@@ -13,7 +13,7 @@ public class AccountRepo : IAccountRepo
     private const string DbName = "userinfo";
     private const string ConnStr = "server=" + DbHost + ";user=" + DbUser + ";database=" + DbName + ";port=3306;password=;";
 
-    public HttpStatusCode CreateAccount(string username, string password)
+    public virtual HttpStatusCode CreateAccount(string username, string password)
     {
         IDbConnection conn = new MySqlConnection(ConnStr);
         try
@@ -44,7 +44,7 @@ public class AccountRepo : IAccountRepo
         return HttpStatusCode.OK;
     }
     
-    public async Task<bool> CheckUserExist(string username)
+    public virtual async Task<bool> CheckUserExist(string username)
     {
         IDbConnection conn = new MySqlConnection(ConnStr);
         try
@@ -73,7 +73,7 @@ public class AccountRepo : IAccountRepo
         return false;
     }
 
-    public async Task<bool> CheckPassword(string username, string password)
+    public virtual async Task<bool> CheckPassword(string username, string password)
     {
         IDbConnection conn = new MySqlConnection(ConnStr);
         try
@@ -106,7 +106,7 @@ public class AccountRepo : IAccountRepo
         return true;
     }
     
-    public HttpStatusCode ChangePassword(string username, string newPassword)
+    public virtual HttpStatusCode ChangePassword(string username, string newPassword)
     {
         IDbConnection conn = new MySqlConnection(ConnStr);
         try

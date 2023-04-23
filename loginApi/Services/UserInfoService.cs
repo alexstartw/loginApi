@@ -20,7 +20,7 @@ public class UserInfoService
             return _accountRepo.CreateAccount(username, password);
         }
 
-        return checkUserExistStatus ? HttpStatusCode.Conflict : HttpStatusCode.InternalServerError;
+        return HttpStatusCode.Conflict;
 
     }
     

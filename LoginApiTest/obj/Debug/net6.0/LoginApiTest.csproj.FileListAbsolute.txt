@@ -135,3 +135,4 @@ C:\Users\User\RiderProjects\loginApi\LoginApiTest\bin\Debug\net6.0\runtimes\win\
 C:\Users\User\RiderProjects\loginApi\LoginApiTest\bin\Debug\net6.0\runtimes\win\lib\netcoreapp3.0\System.Windows.Extensions.dll
 C:\Users\User\RiderProjects\loginApi\LoginApiTest\bin\Debug\net6.0\loginApi.dll
 C:\Users\User\RiderProjects\loginApi\LoginApiTest\bin\Debug\net6.0\loginApi.pdb
+C:\Users\User\RiderProjects\loginApi\LoginApiTest\bin\Debug\net6.0\NSubstitute.dll
