@@ -22,7 +22,7 @@ public class CheckInTest
     }
     
     [Test]
-    public async Task TodayCheckInShouldReturnTrue()
+    public async Task TodayCheckInShouldReturnFalseWhenAlreadyCheck()
     {
         var tzi = TimeZoneInfo.FindSystemTimeZoneById("Taipei Standard Time");
         var nowDatetime = TimeZoneInfo.ConvertTime(DateTimeOffset.Now, tzi);
@@ -35,13 +35,32 @@ public class CheckInTest
         }
 
         _accountRepo.CheckUserExist("username").Returns(true);
-        _checkInRepo.GetTodayCheckInStatus("username", localDay).Returns(false);
-        _checkInRepo.TodayCheckIn("username", localDay).Returns(true);
+        _checkInRepo.GetTodayCheckInStatus("username", localDay).Returns(true);
         
         var result = await _checkInService.TodayCheckIn("username");
         
         
-        Assert.That(result, Is.EqualTo(true));
+        Assert.That(result, Is.EqualTo(false));
+    }
+    
+    [Test]
+    public async Task TodayCheckInShouldReturnFalseWhenNotCheck()
+    {
+        var tzi = TimeZoneInfo.FindSystemTimeZoneById("Taipei Standard Time");
+        var nowDatetime = TimeZoneInfo.ConvertTime(DateTimeOffset.Now, tzi);
+
+        var localTime = nowDatetime.LocalDateTime;
+        var localDay = localTime;
+        if (localTime.TimeOfDay < new TimeSpan(5, 0, 0))
+        {
+            localDay = localDay.AddDays(-1);
+        }
+
+        _checkInRepo.GetTodayCheckInStatus("username", localDay).Returns(false);
+        
+        var result = _checkInService.GetTodayCheckInStatus("username");
+        
+        Assert.That(result, Is.EqualTo(false));
     }
     
 }
