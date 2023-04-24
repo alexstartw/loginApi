@@ -31,8 +31,13 @@ public class CheckInService
         Console.WriteLine("CheckInService: hadCheckIn: " + hadCheckIn);
         if (userExist && !hadCheckIn)
         {
-            Console.WriteLine("CheckInService: TodayCheckIn");
-            return _checkInRepo.TodayCheckIn(username, localDay);
+            var result = _checkInRepo.TodayCheckIn(username, localDay);
+            
+            Console.WriteLine("CheckInService: " + result);
+            if (result)
+            {
+                return true;
+            }
         }
 
         return false;

@@ -1,11 +1,19 @@
 {
   "Version": 1,
-  "Hash": "fJ1f1cEZSRxRK8V4xtvvrdanBQVzFiMWEW0lrYeGEx8=",
+  "Hash": "FkxCkw1SES+cLRN0Px9Gs+dZdU7AJAbVqUYX0V93h/g=",
   "Source": "loginApi",
   "BasePath": "_content/loginApi",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [],
-  "DiscoveryPatterns": [],
+  "DiscoveryPatterns": [
+    {
+      "Name": "loginApi\\wwwroot",
+      "Source": "loginApi",
+      "ContentRoot": "C:\\Users\\User\\RiderProjects\\loginApi\\loginApi\\wwwroot\\",
+      "BasePath": "_content/loginApi",
+      "Pattern": "**"
+    }
+  ],
   "Assets": []
 }

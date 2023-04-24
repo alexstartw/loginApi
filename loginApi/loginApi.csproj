@@ -14,6 +14,13 @@
 
     <ItemGroup>
       <Folder Include="obj\Debug\net6.0" />
+      <Folder Include="wwwroot" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <_ContentIncludedByDefault Remove="wwwroot\css\app.528e95a5.css" />
+      <_ContentIncludedByDefault Remove="wwwroot\js\chunk-vendors.3c078a9d.js" />
+      <_ContentIncludedByDefault Remove="wwwroot\js\chunk-vendors.3c078a9d.js.map" />
     </ItemGroup>
 
 </Project>

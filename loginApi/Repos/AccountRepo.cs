@@ -11,7 +11,7 @@ public class AccountRepo : IAccountRepo
     private const string DbHost = "35.201.224.32";
     private const string DbUser = "root";
     private const string DbName = "userinfo";
-    private const string ConnStr = "server=" + DbHost + ";user=" + DbUser + ";database=" + DbName + ";port=3306;password=;";
+    private const string ConnStr = "server=" + DbHost + ";user=" + DbUser + ";database=" + DbName + ";port=3306;password=zxcvbnm;";
 
     public virtual HttpStatusCode CreateAccount(string username, string password)
     {

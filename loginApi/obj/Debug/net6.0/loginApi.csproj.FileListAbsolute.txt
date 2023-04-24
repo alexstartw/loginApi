@@ -54,3 +54,4 @@ C:\Users\User\RiderProjects\loginApi\loginApi\obj\Debug\net6.0\loginApi.pdb
 C:\Users\User\RiderProjects\loginApi\loginApi\obj\Debug\net6.0\loginApi.genruntimeconfig.cache
 C:\Users\User\RiderProjects\loginApi\loginApi\obj\Debug\net6.0\ref\loginApi.dll
 C:\Users\User\RiderProjects\loginApi\loginApi\bin\Debug\net6.0\global.json
+C:\Users\User\RiderProjects\loginApi\loginApi\bin\Debug\net6.0\loginApi.staticwebassets.runtime.json
