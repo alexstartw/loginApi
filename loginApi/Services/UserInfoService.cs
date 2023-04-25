@@ -46,4 +46,16 @@ public class UserInfoService
         
         return _accountRepo.ChangePassword(username, newPassword) ;
     }
+
+    public async Task<bool> ChangeUserStatus(string loginUser, string changeUser, int status)
+    {
+        if (!loginUser.Equals("admin"))
+        {
+            return false;
+        }
+        else
+        {
+            return await _accountRepo.ChangeUserStatus(changeUser, status);
+        }
+    }
 }

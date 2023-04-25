@@ -129,4 +129,29 @@ public class AccountRepo : IAccountRepo
         Console.WriteLine("Done.");
         return HttpStatusCode.OK;
     }
+
+    public async Task<bool> ChangeUserStatus(string username, int status)
+    {
+        IDbConnection conn = new MySqlConnection(ConnStr);
+        try
+        {
+            Console.WriteLine("Connecting to MySQL...");
+            conn.Open();
+            Console.WriteLine("Connected!");
+            
+            string sql = $"UPDATE userinfo SET enable = @status WHERE username = @username";
+            var rowAffected = await conn.ExecuteAsync(sql, new { status, username});
+            Console.WriteLine(rowAffected); 
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.ToString());
+            return false;
+        }
+        
+        conn.Close();
+        Console.WriteLine("Done.");
+        return true;
+
+    }
 }

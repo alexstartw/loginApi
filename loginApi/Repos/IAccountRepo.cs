@@ -8,5 +8,6 @@ public interface IAccountRepo
     public Task<bool> CheckUserExist(string username);
     public Task<bool> CheckPassword(string username, string password);
     public HttpStatusCode ChangePassword(string username, string oldPassword);
-    
+    public Task<bool> ChangeUserStatus(string username, int status);
+
 }
