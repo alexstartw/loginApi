@@ -1,4 +1,5 @@
 ﻿using System.Net;
+using loginApi.Content;
 using loginApi.Repos;
 
 namespace loginApi.Services;
@@ -56,6 +57,18 @@ public class UserInfoService
         else
         {
             return await _accountRepo.ChangeUserStatus(changeUser, status);
+        }
+    }
+
+    public async Task<List<AllUserInfo>> GetAllUserInfo(string loginUser)
+    {
+        if (!loginUser.Equals("admin"))
+        {
+            return new List<AllUserInfo>();
+        }
+        else
+        {
+            return await _accountRepo.GetAllUserInfo();
         }
     }
 }

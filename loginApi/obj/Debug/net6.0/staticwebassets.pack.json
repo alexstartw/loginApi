@@ -1,0 +1,69 @@
+{
+  "Files": [
+    {
+      "Id": "C:\\Users\\User\\RiderProjects\\loginApi\\loginApi\\wwwroot\\225.ad0e0063.js",
+      "PackagePath": "staticwebassets\\225.ad0e0063.js"
+    },
+    {
+      "Id": "C:\\Users\\User\\RiderProjects\\loginApi\\loginApi\\wwwroot\\225.ad0e0063.js.map",
+      "PackagePath": "staticwebassets\\225.ad0e0063.js.map"
+    },
+    {
+      "Id": "C:\\Users\\User\\RiderProjects\\loginApi\\loginApi\\wwwroot\\888.19994fd1.js",
+      "PackagePath": "staticwebassets\\888.19994fd1.js"
+    },
+    {
+      "Id": "C:\\Users\\User\\RiderProjects\\loginApi\\loginApi\\wwwroot\\888.19994fd1.js.map",
+      "PackagePath": "staticwebassets\\888.19994fd1.js.map"
+    },
+    {
+      "Id": "C:\\Users\\User\\RiderProjects\\loginApi\\loginApi\\wwwroot\\app.528e95a5.css",
+      "PackagePath": "staticwebassets\\app.528e95a5.css"
+    },
+    {
+      "Id": "C:\\Users\\User\\RiderProjects\\loginApi\\loginApi\\wwwroot\\app.d1f30c7d.js",
+      "PackagePath": "staticwebassets\\app.d1f30c7d.js"
+    },
+    {
+      "Id": "C:\\Users\\User\\RiderProjects\\loginApi\\loginApi\\wwwroot\\app.d1f30c7d.js.map",
+      "PackagePath": "staticwebassets\\app.d1f30c7d.js.map"
+    },
+    {
+      "Id": "C:\\Users\\User\\RiderProjects\\loginApi\\loginApi\\wwwroot\\chunk-vendors.3c078a9d.js",
+      "PackagePath": "staticwebassets\\chunk-vendors.3c078a9d.js"
+    },
+    {
+      "Id": "C:\\Users\\User\\RiderProjects\\loginApi\\loginApi\\wwwroot\\chunk-vendors.3c078a9d.js.map",
+      "PackagePath": "staticwebassets\\chunk-vendors.3c078a9d.js.map"
+    },
+    {
+      "Id": "C:\\Users\\User\\RiderProjects\\loginApi\\loginApi\\wwwroot\\index.html",
+      "PackagePath": "staticwebassets\\index.html"
+    },
+    {
+      "Id": "C:\\Users\\User\\RiderProjects\\loginApi\\loginApi\\wwwroot\\js\\chunk-vendors.3c078a9d.js",
+      "PackagePath": "staticwebassets\\js\\chunk-vendors.3c078a9d.js"
+    },
+    {
+      "Id": "C:\\Users\\User\\RiderProjects\\loginApi\\loginApi\\wwwroot\\js\\chunk-vendors.3c078a9d.js.map",
+      "PackagePath": "staticwebassets\\js\\chunk-vendors.3c078a9d.js.map"
+    },
+    {
+      "Id": "obj\\Debug\\net6.0\\staticwebassets\\msbuild.build.loginApi.props",
+      "PackagePath": "build\\loginApi.props"
+    },
+    {
+      "Id": "obj\\Debug\\net6.0\\staticwebassets\\msbuild.buildMultiTargeting.loginApi.props",
+      "PackagePath": "buildMultiTargeting\\loginApi.props"
+    },
+    {
+      "Id": "obj\\Debug\\net6.0\\staticwebassets\\msbuild.buildTransitive.loginApi.props",
+      "PackagePath": "buildTransitive\\loginApi.props"
+    },
+    {
+      "Id": "obj\\Debug\\net6.0\\staticwebassets\\msbuild.loginApi.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

@@ -1,6 +1,7 @@
 ﻿using System.Data;
 using System.Net;
 using Dapper;
+using loginApi.Content;
 using loginApi.Enums;
 using MySql.Data.MySqlClient;
 
@@ -153,5 +154,45 @@ public class AccountRepo : IAccountRepo
         Console.WriteLine("Done.");
         return true;
 
+    }
+
+    public async Task<List<AllUserInfo>> GetAllUserInfo()
+    {
+        IDbConnection conn = new MySqlConnection(ConnStr);
+        var result = new List<AllUserInfo>();
+        try
+        {
+            Console.WriteLine("Connecting to MySQL...");
+            conn.Open();
+            Console.WriteLine("Connected!");
+            
+            IDbCommand dbCommand = conn.CreateCommand();
+            dbCommand.CommandText = 
+                $"Select u.username, c.checkin_time, u.enable FROM userinfo.userinfo as u LEFT join userinfo.checkin as c on u.username = c.username";
+            using (IDataReader reader = dbCommand.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    var userdata = new AllUserInfo();
+                    userdata.username = reader.GetString(0);
+                    userdata.checkin_time = reader.IsDBNull(1) ? null : reader.GetDateTime(1).ToString();
+                    userdata.enable = reader.GetInt32(2);
+                    
+                    result.Add(userdata);
+                }
+            }
+
+            Console.WriteLine("Get all user info success.");
+            
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.ToString());
+            return new List<AllUserInfo>{};
+        }
+        
+        conn.Close();
+        Console.WriteLine("Done.");
+        return result;
     }
 }
