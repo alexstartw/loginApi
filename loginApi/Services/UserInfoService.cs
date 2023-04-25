@@ -45,7 +45,7 @@ public class UserInfoService
             return HttpStatusCode.BadRequest;
         }
         
-        return _accountRepo.ChangePassword(username, newPassword) ;
+        return _accountRepo.ChangeOwnPassword(username, newPassword) ;
     }
 
     public async Task<bool> ChangeUserStatus(string loginUser, string changeUser, int status)
@@ -70,5 +70,16 @@ public class UserInfoService
         {
             return await _accountRepo.GetAllUserInfo();
         }
+    }
+    
+    public async Task<HttpStatusCode> ChangeUserPassword(string loginUser, string changeUser, string newPassword)
+    {
+        var checkUserExistStatus = await _accountRepo.CheckUserExist(changeUser);
+        if (!checkUserExistStatus || !loginUser.Equals("admin") )
+        {
+            return HttpStatusCode.BadRequest;
+        }
+        
+        return _accountRepo.ChangeOwnPassword(changeUser, newPassword) ;
     }
 }

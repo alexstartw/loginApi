@@ -107,7 +107,31 @@ public class AccountRepo : IAccountRepo
         return true;
     }
     
-    public virtual HttpStatusCode ChangePassword(string username, string newPassword)
+    public virtual HttpStatusCode ChangeOwnPassword(string username, string newPassword)
+    {
+        IDbConnection conn = new MySqlConnection(ConnStr);
+        try
+        {
+            Console.WriteLine("Connecting to MySQL...");
+            conn.Open();
+            Console.WriteLine("Connected!");
+            
+            string sql = $"UPDATE userinfo SET password = @password WHERE username = @username";
+            var rowAffected = conn.Execute(sql, new { username , password = newPassword });
+            Console.WriteLine(rowAffected);
+
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.ToString());
+            return HttpStatusCode.InternalServerError; 
+        }
+        conn.Close();
+        Console.WriteLine("Done.");
+        return HttpStatusCode.OK;
+    }
+    
+    public virtual HttpStatusCode ChangeUserPassword(string username, string newPassword)
     {
         IDbConnection conn = new MySqlConnection(ConnStr);
         try

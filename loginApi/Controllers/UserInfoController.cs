@@ -51,6 +51,12 @@ public class LoginController : Controller
     {
         return await _userInfoService.GetAllUserInfo(loginUser);
     }
+    
+    [HttpPost]
+    public async Task<HttpStatusCode> ChangeUserPassword(string loginUser, string changeUser, string newPassword)
+    {
+        return await _userInfoService.ChangeUserPassword(loginUser, changeUser, newPassword);
+    }
 
     [HttpGet]
     public string Test()
